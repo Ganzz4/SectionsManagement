@@ -5,6 +5,7 @@ import com.ganzz.web.models.Section;
 
 import java.util.List;
 
+
 public interface SectionService {
     List<SectionDto> findAllSections();
 }

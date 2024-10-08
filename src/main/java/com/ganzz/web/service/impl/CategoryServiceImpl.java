@@ -1,13 +1,11 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
-import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Category;
-import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.CategoryRepository;
+import com.ganzz.web.repository.CategoryRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
