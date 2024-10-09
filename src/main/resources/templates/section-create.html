@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Section Create</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/sections/new}" th:object="${section}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputTitle">Title</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputTitle"
+                                placeholder="Title"
+                                name="title"
+                                th:field="*{title}">
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhotoUrl">PhotoUrl</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputPhotoUrl"
+                                placeholder="PhotoUrl"
+                                name="photoUrl"
+                                th:field="*{photoUrl}">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLocation">Location</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputLocation"
+                            placeholder="Chisinau, Centru"
+                            name="location"
+                            th:field="*{location}">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputState">Category</label>
+                    <select
+                            id="inputState"
+                            class="form-control"
+                            name="category"
+                            th:field="*{category}">
+
+                        <option selected value="">Choose...</option>
+
+                        <th:block th:each="category : ${categories}">
+                            <option th:value="${category.id}" th:text="${category.name}"></option>
+                        </th:block>
+
+                    </select>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="inputContent">Content</label>
+                        <textarea
+                                class="form-control"
+                                id="inputContent"
+                                placeholder="Input Content"
+                                rows="4"
+                                name="content"
+                                th:field="*{content}"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputOpeningHours">Opening Hours</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputOpeningHours"
+                                placeholder="Input Opening Hours"
+                                name="openingHours"
+                                th:field="*{openingHours}">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="inputContactInfo">Contact Info</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputContactInfo"
+                                placeholder="+373********"
+                                name="contactInfo"
+                                th:field="*{contactInfo}">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

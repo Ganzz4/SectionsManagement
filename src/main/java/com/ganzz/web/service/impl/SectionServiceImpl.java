@@ -26,6 +26,11 @@ public class SectionServiceImpl implements SectionService {
         return sections.stream().map((section) -> mapToSectionDto(section)).collect(Collectors.toList());
     }
 
+    @Override
+    public Section saveSection(Section section) {
+        return sectionRepository.save(section);
+    }
+
     private SectionDto mapToSectionDto(Section section) {
         SectionDto sectionDto = SectionDto.builder()
                 .id(section.getId())
