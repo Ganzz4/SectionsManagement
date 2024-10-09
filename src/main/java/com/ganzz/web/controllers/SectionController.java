@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -48,4 +49,23 @@ public class SectionController {
         sectionService.saveSection(section);
         return "redirect:/sections";
     }
+
+    @GetMapping("/sections/{sectionId}/edit")
+    public String editSection(@PathVariable("sectionId") long sectionId, Model model) {
+        SectionDto sectionDto = sectionService.findSectionById(sectionId);
+        model.addAttribute("section", sectionDto);
+
+        List<CategoryDto> categories = categoryService.findAllCategories();
+        model.addAttribute("categories", categories);
+
+        return "section-edit";
+    }
+
+    @PostMapping("/sections/{sectionId}/edit")
+    public String editSection(@PathVariable("sectionId") Long sectionId, @ModelAttribute("section") SectionDto sectionDto) {
+        sectionDto.setId(sectionId);
+        sectionService.updateSection(sectionDto);
+        return "redirect:/sections";
+    }
+
 }

@@ -31,6 +31,34 @@ public class SectionServiceImpl implements SectionService {
         return sectionRepository.save(section);
     }
 
+    @Override
+    public SectionDto findSectionById(long sectionId) {
+        Section section = sectionRepository.findById(sectionId).get();
+        return mapToSectionDto(section);
+    }
+
+    @Override
+    public void updateSection(SectionDto sectionDto) {
+        Section section = mapToSection(sectionDto);
+        sectionRepository.save(section);
+    }
+
+    private Section mapToSection(SectionDto sectionDto) {
+        Section section = Section.builder()
+                .id(sectionDto.getId())
+                .title(sectionDto.getTitle())
+                .content(sectionDto.getContent())
+                .category(sectionDto.getCategory())
+                .contactInfo(sectionDto.getContactInfo())
+                .photoUrl(sectionDto.getPhotoUrl())
+                .createdOn(sectionDto.getCreatedOn())
+                .updatedOn(sectionDto.getUpdatedOn())
+                .openingHours(sectionDto.getOpeningHours())
+                .location(sectionDto.getLocation())
+                .build();
+        return section;
+    }
+
     private SectionDto mapToSectionDto(Section section) {
         SectionDto sectionDto = SectionDto.builder()
                 .id(section.getId())

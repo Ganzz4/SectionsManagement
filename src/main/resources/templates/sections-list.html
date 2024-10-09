@@ -18,12 +18,14 @@ layout:decorate="~{layout}">
                 <p class="lead fw-normal text-muted mb-0">Sections found in your area</p>
             </div>
             <div class="row gx-5">
-                <div th:each="section : ${sections}" class="col-lg-6">
-                    <div class="position-relative mb-5">
+                <div th:each="section : ${sections}" class="col-lg-6 mb-2">
+                    <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${section.photoUrl}" alt="..."/>
                         <a th:text="${section.getTitle()}"
                            class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
+                    <a class="btn btn-primary" th:href="@{/sections/{sectionId}/edit(sectionId= ${section.getId()})}">Edit</a>
+
                 </div>
             </div>
         </div>
