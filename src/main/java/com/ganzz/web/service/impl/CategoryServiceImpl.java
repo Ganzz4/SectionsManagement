@@ -1,7 +1,9 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
+import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Category;
+import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,32 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> findAllCategories() {
         List<Category> sections = categoryRepository.findAll();
         return sections.stream().map((section) -> mapToCategoryDto(section)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+
+    }
+
+    @Override
+    public CategoryDto findCategoryById(long categoryId) {
+        Category category = categoryRepository.findById(categoryId).get();
+        return mapToCategoryDto(category);
+    }
+
+    @Override
+    public void updateCategory(CategoryDto categoryDto) {
+        Category category = mapToCategory(categoryDto);
+        categoryRepository.save(category);
+    }
+
+    private Category mapToCategory(CategoryDto categoryDto) {
+        Category category = Category.builder()
+                .id(categoryDto.getId())
+                .name(categoryDto.getName())
+                .build();
+        return category;
     }
 
     private CategoryDto mapToCategoryDto(Category category) {
