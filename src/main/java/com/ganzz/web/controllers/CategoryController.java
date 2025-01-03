@@ -7,9 +7,11 @@ import com.ganzz.web.models.Category;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
 import com.ganzz.web.service.SectionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +44,11 @@ public class CategoryController {
     }
 
     @PostMapping("/categories/new")
-    public String saveCategory(@ModelAttribute("category") Category category) {
-        categoryService.saveCategory(category);
+    public String saveCategory(@Valid @ModelAttribute("category") CategoryDto categoryDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "category-create";
+        }
+        categoryService.saveCategory(categoryDto);
         return "redirect:/categories";
     }
 
@@ -56,7 +61,14 @@ public class CategoryController {
     }
 
     @PostMapping("/categories/{categoryId}/edit")
-    public String editCategory(@PathVariable("categoryId") Long categoryId, @ModelAttribute("category") CategoryDto categoryDto) {
+    public String editCategory(@PathVariable("categoryId") Long categoryId, @Valid @ModelAttribute("category") CategoryDto categoryDto,
+                               BindingResult bindingResult) {
+
+
+        if (bindingResult.hasErrors()) {
+            return "category-edit";
+        }
+
         categoryDto.setId(categoryId);
         categoryService.updateCategory(categoryDto);
         return "redirect:/categories";

@@ -25,6 +25,8 @@
                     placeholder="Category Name"
                     name="name"
                     th:field="*{name}">
+            <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Edit</button>

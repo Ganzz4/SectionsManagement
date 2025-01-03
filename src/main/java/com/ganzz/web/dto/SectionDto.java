@@ -2,6 +2,10 @@ package com.ganzz.web.dto;
 
 import com.ganzz.web.models.Category;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,14 +17,21 @@ import java.time.LocalDateTime;
 @Builder
 public class SectionDto {
     private Long id;
+    @NotBlank(message = "Section title should not be empty")
     private String title;
+    @NotBlank(message = "Location should not be empty")
     private String location;
+    @NotBlank(message = "Photo link title should not be empty")
     private String photoUrl;
+    @NotNull(message = "Category should not be empty")
     private Category category;
+    @NotBlank(message = "Content should not be empty")
     private String content;
+    @NotBlank(message = "Opening hours  should not be empty")
     private String openingHours;
+    @NotBlank(message = "Contact info should not be empty")
+    @Pattern(regexp = "^[+]?\\d{10,15}$", message = "Invalid contact number format")
     private String contactInfo;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
-
 }

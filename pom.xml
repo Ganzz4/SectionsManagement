@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ganzz</groupId>
-	<artifactId>web</artifactId>
+	<artifactId>SectionsManagement</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>web</name>
 	<description>Section Viewer Application</description>
@@ -70,6 +70,10 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 			<version>3.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 	</dependencies>

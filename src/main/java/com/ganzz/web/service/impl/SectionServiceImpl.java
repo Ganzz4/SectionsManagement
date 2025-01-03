@@ -27,7 +27,8 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public Section saveSection(Section section) {
+    public Section saveSection(SectionDto sectionDto) {
+        Section section = mapToSection(sectionDto);
         return sectionRepository.save(section);
     }
 

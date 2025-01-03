@@ -24,8 +24,9 @@
                     id="inputTitle"
                     placeholder="Title"
                     name="title"
-                    th:field="*{title}">
-
+                    th:field="*{title}"
+             >
+            <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
           </div>
           <div class="form-group col-md-6">
             <label for="inputPhotoUrl">PhotoUrl</label>
@@ -36,6 +37,7 @@
                     placeholder="PhotoUrl"
                     name="photoUrl"
                     th:field="*{photoUrl}">
+            <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
           </div>
         </div>
         <div class="form-group col-md-6">
@@ -47,6 +49,7 @@
                   placeholder="Chisinau, Centru"
                   name="location"
                   th:field="*{location}">
+          <p th:if="${#fields.hasErrors('location')}" class="text-danger" th:errors="*{location}"></p>
         </div>
 
         <div class="form-group col-md-6">
@@ -64,6 +67,7 @@
             </th:block>
 
           </select>
+          <p th:if="${#fields.hasErrors('category')}" class="text-danger" th:errors="*{category}"></p>
         </div>
 
         <div class="form-row mb-3">
@@ -76,6 +80,7 @@
                     rows="4"
                     name="content"
                     th:field="*{content}"></textarea>
+            <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
           </div>
 
           <div class="form-group col-md-6">
@@ -87,6 +92,8 @@
                     placeholder="Input Opening Hours"
                     name="openingHours"
                     th:field="*{openingHours}">
+            <p th:if="${#fields.hasErrors('openingHours')}" class="text-danger" th:errors="*{openingHours}"></p>
+
           </div>
 
           <div class="form-group col-md-2">
@@ -98,6 +105,7 @@
                     placeholder="+373********"
                     name="contactInfo"
                     th:field="*{contactInfo}">
+            <p th:if="${#fields.hasErrors('contactInfo')}" class="text-danger" th:errors="*{contactInfo}"></p>
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Edit</button>
