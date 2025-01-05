@@ -12,4 +12,6 @@ public interface SectionService {
     SectionDto findSectionById(long sectionId);
 
     void updateSection(SectionDto sectionDto);
+
+    void delete(long sectionId);
 }

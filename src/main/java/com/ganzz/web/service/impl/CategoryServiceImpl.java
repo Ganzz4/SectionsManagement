@@ -47,6 +47,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
     }
 
+    @Override
+    public void delete(long sectionId) {
+        categoryRepository.deleteById(sectionId);
+    }
+
     private Category mapToCategory(CategoryDto categoryDto) {
         Category category = Category.builder()
                 .id(categoryDto.getId())

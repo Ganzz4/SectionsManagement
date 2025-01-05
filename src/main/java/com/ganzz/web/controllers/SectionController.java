@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,12 @@ public class SectionController {
         this.sectionService = sectionService;
         this.categoryService = categoryService;
     }
+
+    private void addCategoriesToModel(Model model) {
+        List<CategoryDto> categories = categoryService.findAllCategories();
+        model.addAttribute("categories", categories);
+    }
+
     @GetMapping("/sections")
     public String listSections(Model model) {
         List<SectionDto> sections = sectionService.findAllSections();
@@ -36,27 +39,31 @@ public class SectionController {
     }
 
     @GetMapping("/sections/{sectionId}")
-public String sectionDetail(@PathVariable("sectionId") long sectionId, Model model) {
-SectionDto sectionDto = sectionService.findSectionById(sectionId);
-model.addAttribute("section", sectionDto);
-return "section-detail";
+    public String sectionDetail(@PathVariable("sectionId") long sectionId, Model model) {
+        SectionDto sectionDto = sectionService.findSectionById(sectionId);
+        model.addAttribute("section", sectionDto);
+        return "section-detail";
     }
+
     @GetMapping("/sections/new")
     public String createSectionForm(Model model) {
         Section section = new Section();
         model.addAttribute("section", section);
 
-        List<CategoryDto> categories = categoryService.findAllCategories();
-        model.addAttribute("categories", categories);
-
+        addCategoriesToModel(model);
         return "section-create";
+    }
+
+    @DeleteMapping("/sections/{sectionId}/delete")
+    public String deleteSection(@PathVariable("sectionId") long sectionId, Model model) {
+        sectionService.delete(sectionId);
+        return "redirect:/sections";
     }
 
     @PostMapping("/sections/new")
     public String saveSection(@Valid @ModelAttribute("section") SectionDto sectionDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            List<CategoryDto> categories = categoryService.findAllCategories();
-            model.addAttribute("categories", categories);
+            addCategoriesToModel(model);
             return "section-create";
         }
         sectionService.saveSection(sectionDto);
@@ -68,19 +75,17 @@ return "section-detail";
         SectionDto sectionDto = sectionService.findSectionById(sectionId);
         model.addAttribute("section", sectionDto);
 
-        List<CategoryDto> categories = categoryService.findAllCategories();
-        model.addAttribute("categories", categories);
+        addCategoriesToModel(model);
 
         return "section-edit";
     }
 
     @PostMapping("/sections/{sectionId}/edit")
     public String editSection(@PathVariable("sectionId") Long sectionId, @Valid @ModelAttribute("section") SectionDto sectionDto
-    , BindingResult bindingResult, Model model) {
+            , BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            List<CategoryDto> categories = categoryService.findAllCategories();
-            model.addAttribute("categories", categories);
+            addCategoriesToModel(model);
             return "section-edit";
         }
         sectionDto.setId(sectionId);

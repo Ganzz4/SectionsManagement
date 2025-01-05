@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
-    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Sections</title>
+    <title th:text="${CONTENT_TITLE} + ' - ' + ${LAYOUT_TITLE}">Sections</title>
 </head>
 
 <!-- Navigation-->
@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/clubs}">Find sections</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/sections}">Find sections</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/events}">Find Events</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/categories}">Find categories</a></li>
                 <li class="nav-item"><a class="nav-link" href="pricing.html">Null</a></li>

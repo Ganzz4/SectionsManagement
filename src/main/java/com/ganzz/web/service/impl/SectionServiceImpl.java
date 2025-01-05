@@ -44,6 +44,11 @@ public class SectionServiceImpl implements SectionService {
         sectionRepository.save(section);
     }
 
+    @Override
+    public void delete(long categoryId) {
+       sectionRepository.deleteById(categoryId);
+    }
+
     private Section mapToSection(SectionDto sectionDto) {
         Section section = Section.builder()
                 .id(sectionDto.getId())

@@ -30,7 +30,10 @@
                             <div class="small text-muted" th:text="${section.createdOn}" ></div>
                             <h2 class="card-title">About this section</h2>
                             <p class="card-text" th:text="${section.content}"></p>
-                            <a class="btn btn-primary" >Delete</a>
+                            <form th:action="@{/sections/{sectionId}/delete(sectionId=${section.id})}" method="post">
+                                <input type="hidden" name="_method" value="delete" />
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this section?');">Delete</button>
+                            </form>
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->

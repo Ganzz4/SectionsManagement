@@ -13,24 +13,31 @@
 
   <section layout:fragment="body" class="py-5">
     <div class="container">
-      <form role="form" method="post" th:action="@{/categories/{categoryId}/edit(categoryId= ${category.getId()})}" th:object="${category}">
-        <input type="hidden" th:field="*{id}">
-        <div class="form-row mb-3">
-          <div class="form-group col-md-6">
-            <label for="inputName">Name</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="inputName"
-                    placeholder="Category Name"
-                    name="name"
-                    th:field="*{name}">
-            <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
-
+      <div class="row justify-content-start">
+        <form role="form" method="post" th:action="@{/categories/{categoryId}/edit(categoryId=${category.getId()})}" th:object="${category}" class="col-md-6">
+          <input type="hidden" th:field="*{id}">
+          <div class="form-row mb-3">
+            <div class="form-group">
+              <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="inputName" placeholder="Category Name"
+                     name="name" th:field="*{name}">
+              <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+            </div>
           </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
-      </form>
+          <button type="submit" class="btn btn-primary w-25">Edit</button>
+        </form>
+      </div>
+
+      <div class="row justify-content-start mt-2">
+        <form th:action="@{/categories/{categoryId}/delete(categoryId=${category.getId()})}"
+              method="post" class="col-md-6">
+          <input type="hidden" name="_method" value="delete" />
+          <button type="submit" class="btn btn-danger w-25"
+                  onclick="return confirm('Are you sure you want to delete this category?');">
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 </main>
