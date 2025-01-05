@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public String categories(Model model) {
+    public String listCategories(Model model) {
         List<CategoryDto> categories = categoryService.findAllCategories();
         model.addAttribute("categories", categories);
         return "categories-list";

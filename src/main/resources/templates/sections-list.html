@@ -24,6 +24,8 @@ layout:decorate="~{layout}">
                         <a th:text="${section.getTitle()}"
                            class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
                     </div>
+                    <a class="btn btn-primary" th:href="@{/sections/{sectionId}(sectionId= ${section.getId()})}">View</a>
+
                     <a class="btn btn-primary" th:href="@{/sections/{sectionId}/edit(sectionId= ${section.getId()})}">Edit</a>
 
                 </div>

@@ -29,12 +29,18 @@ public class SectionController {
         this.categoryService = categoryService;
     }
     @GetMapping("/sections")
-    public String sections(Model model) {
+    public String listSections(Model model) {
         List<SectionDto> sections = sectionService.findAllSections();
         model.addAttribute("sections", sections);
         return "sections-list";
     }
 
+    @GetMapping("/sections/{sectionId}")
+public String sectionDetail(@PathVariable("sectionId") long sectionId, Model model) {
+SectionDto sectionDto = sectionService.findSectionById(sectionId);
+model.addAttribute("section", sectionDto);
+return "section-detail";
+    }
     @GetMapping("/sections/new")
     public String createSectionForm(Model model) {
         Section section = new Section();
