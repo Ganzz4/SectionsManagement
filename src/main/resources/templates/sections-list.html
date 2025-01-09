@@ -34,16 +34,18 @@ layout:decorate="~{layout}">
                 </div>
             </div>
             <div class="row">
-                <div th:each="section : ${sections}" class="col-lg-6 mb-2">
-                    <div class="position-relative mb-3">
-                        <img class="img-fluid rounded-3 mb-3" th:src="${section.photoUrl}" alt="..."/>
+                <div th:each="section : ${sections}" class="col-lg-6 mb-4">
+                    <div class="position-relative">
+                        <div class="ratio ratio-16x9 mb-3" >
+                            <img class="rounded-3 object-fit-cover" th:src="${section.photoUrl}"  alt="..."/>
+                        </div>
                         <a th:text="${section.getTitle()}"
-                           class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                           class="h3 fw-bolder text-decoration-none link-dark d-block mb-3"
+                           href="#!">Project name</a>
                     </div>
-                    <a class="btn btn-primary" th:href="@{/sections/{sectionId}(sectionId= ${section.getId()})}">View</a>
-
-                    <a class="btn btn-primary" th:href="@{/sections/{sectionId}/edit(sectionId= ${section.getId()})}">Edit</a>
-
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-primary" th:href="@{/sections/{sectionId}(sectionId= ${section.getId()})}">View</a>
+                    </div>
                 </div>
             </div>
         </div>

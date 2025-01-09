@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -41,6 +43,15 @@ public class SectionController {
     @GetMapping("/sections/{sectionId}")
     public String sectionDetail(@PathVariable("sectionId") long sectionId, Model model) {
         SectionDto sectionDto = sectionService.findSectionById(sectionId);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
+        String formattedDate;
+        if (sectionDto.getCreatedOn() != null) {
+            formattedDate = sectionDto.getCreatedOn().format(formatter);
+        }else{
+            formattedDate = "";
+        }
+        model.addAttribute("formattedDate", formattedDate);
         model.addAttribute("section", sectionDto);
         return "section-detail";
     }
