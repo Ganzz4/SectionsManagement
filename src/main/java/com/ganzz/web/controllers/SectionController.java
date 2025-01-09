@@ -60,6 +60,14 @@ public class SectionController {
         return "redirect:/sections";
     }
 
+    @GetMapping("/sections/search")
+    public String searchSection(@RequestParam(value = "query") String query, Model model) {
+        List<SectionDto> sections = sectionService.searchSections(query);
+        model.addAttribute("sections", sections);
+
+        return "sections-list";
+    }
+
     @PostMapping("/sections/new")
     public String saveSection(@Valid @ModelAttribute("section") SectionDto sectionDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

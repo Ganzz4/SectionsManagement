@@ -9,6 +9,7 @@ import com.ganzz.web.repository.SectionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -48,6 +49,19 @@ public class SectionServiceImpl implements SectionService {
     public void delete(long categoryId) {
        sectionRepository.deleteById(categoryId);
     }
+
+    public List<SectionDto> searchSections(String query) {
+        List<Section> sections;
+        if (query == null || query.trim().isEmpty()) {
+            sections = sectionRepository.findAll();
+        } else {
+            sections = sectionRepository.searchSections(query);
+        }
+        return sections.stream()
+                .map(this::mapToSectionDto)
+                .collect(Collectors.toList());
+    }
+
 
     private Section mapToSection(SectionDto sectionDto) {
         Section section = Section.builder()

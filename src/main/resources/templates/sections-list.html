@@ -17,7 +17,23 @@ layout:decorate="~{layout}">
                 <h1 class="fw-bolder">Sections Near You</h1>
                 <p class="lead fw-normal text-muted mb-0">Sections found in your area</p>
             </div>
-            <div class="row gx-5">
+
+
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-6">
+                    <form th:action="@{/sections/search}" class="d-flex gap-2">
+                        <input name="query" class="form-control" type="search" placeholder="Search sections..." aria-label="Search"
+                        >
+                        <button type="submit" class="btn btn-primary d-inline-flex align-items-center" title="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <a th:href="@{/sections}" class="btn btn-secondary d-inline-flex align-items-center" title="Reset">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
                 <div th:each="section : ${sections}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${section.photoUrl}" alt="..."/>

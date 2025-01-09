@@ -14,4 +14,5 @@ public interface SectionService {
     void updateSection(SectionDto sectionDto);
 
     void delete(long sectionId);
+    List<SectionDto> searchSections(String query);
 }
