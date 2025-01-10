@@ -3,6 +3,7 @@ package com.ganzz.web.service.impl;
 import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.service.SectionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ganzz.web.repository.SectionRepository;
@@ -13,13 +14,11 @@ import java.util.stream.Stream;
 
 
 @Service
+@RequiredArgsConstructor
 public class SectionServiceImpl implements SectionService {
-    private SectionRepository sectionRepository;
+    private final SectionRepository sectionRepository;
+    private final PhotoService photoService;
 
-    @Autowired
-    public SectionServiceImpl(SectionRepository sectionRepository) {
-        this.sectionRepository = sectionRepository;
-    }
 
     @Override
     public List<SectionDto> findAllSections() {
@@ -29,6 +28,8 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public Section saveSection(SectionDto sectionDto) {
+        sectionDto.setPhotoUrl(photoService.getValidPhotoUrl(sectionDto.getPhotoUrl()));
+
         Section section = mapToSection(sectionDto);
         return sectionRepository.save(section);
     }
@@ -41,6 +42,8 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public void updateSection(SectionDto sectionDto) {
+        sectionDto.setPhotoUrl(photoService.getValidPhotoUrl(sectionDto.getPhotoUrl()));
+
         Section section = mapToSection(sectionDto);
         sectionRepository.save(section);
     }

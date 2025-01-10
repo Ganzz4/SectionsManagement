@@ -21,7 +21,6 @@ public class SectionDto {
     private String title;
     @NotBlank(message = "Location should not be empty")
     private String location;
-    @NotBlank(message = "Photo link title should not be empty")
     private String photoUrl;
     @NotNull(message = "Category should not be empty")
     private Category category;
