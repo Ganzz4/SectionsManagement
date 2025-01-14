@@ -4,20 +4,18 @@ import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.service.SectionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ganzz.web.repository.SectionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
 @RequiredArgsConstructor
 public class SectionServiceImpl implements SectionService {
     private final SectionRepository sectionRepository;
-    private final PhotoService photoService;
+    private final PhotoServiceImpl photoService;
 
 
     @Override

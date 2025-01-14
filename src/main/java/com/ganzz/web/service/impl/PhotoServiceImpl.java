@@ -1,5 +1,6 @@
 package com.ganzz.web.service.impl;
 
+import com.ganzz.web.service.PhotoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.nio.file.*;
 
 @Slf4j
 @Service
-public class PhotoService {
+public class PhotoServiceImpl implements PhotoService {
 
     @Value("${app.default-photo:/images/default-section.jpg}")
     private String defaultPhoto;
