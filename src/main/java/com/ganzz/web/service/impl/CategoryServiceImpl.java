@@ -2,6 +2,7 @@ package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
 import com.ganzz.web.dto.SectionDto;
+import com.ganzz.web.mapper.CategoryMapper;
 import com.ganzz.web.models.Category;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
@@ -12,10 +13,13 @@ import com.ganzz.web.repository.CategoryRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ganzz.web.mapper.CategoryMapper.mapToCategory;
+import static com.ganzz.web.mapper.CategoryMapper.mapToCategoryDto;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
@@ -28,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         categories.sort((category1, category2) -> category1.getName().compareToIgnoreCase(category2.getName()));
 
-        return categories.stream().map(this::mapToCategoryDto).collect(Collectors.toList());
+        return categories.stream().map(CategoryMapper::mapToCategoryDto).collect(Collectors.toList());
     }
 
     @Override
@@ -55,20 +59,5 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(sectionId);
     }
 
-    private Category mapToCategory(CategoryDto categoryDto) {
-        Category category = Category.builder()
-                .id(categoryDto.getId())
-                .name(categoryDto.getName())
-                .build();
-        return category;
-    }
 
-    private CategoryDto mapToCategoryDto(Category category) {
-        CategoryDto categoryDto = CategoryDto.builder()
-                .id(category.getId())
-                .name(category.getName())
-                .build();
-
-        return categoryDto;
-    }
 }

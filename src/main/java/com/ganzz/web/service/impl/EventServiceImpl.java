@@ -9,6 +9,8 @@ import com.ganzz.web.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.ganzz.web.mapper.EventMapper.mapToEvent;
+
 @RequiredArgsConstructor
 @Service
 public class EventServiceImpl implements EventService {
@@ -22,16 +24,5 @@ public class EventServiceImpl implements EventService {
         event.setSection(section);
         eventRepository.save(event);
     }
-    private Event mapToEvent(EventDto eventDto) {
-        return Event.builder()
-                .id(eventDto.getId())
-                .name(eventDto.getName())
-                .startTime(eventDto.getStartTime())
-                .endTime(eventDto.getEndTime())
-                .type(eventDto.getType())
-                .photoUrl(eventDto.getPhotoUrl())
-                .createdOn(eventDto.getCreatedOn())
-                .updatedOn(eventDto.getUpdatedOn())
-                .build();
-    }
+
 }

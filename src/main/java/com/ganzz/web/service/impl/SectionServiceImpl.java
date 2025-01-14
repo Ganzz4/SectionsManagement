@@ -1,6 +1,7 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.SectionDto;
+import com.ganzz.web.mapper.SectionMapper;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.service.SectionService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,9 @@ import com.ganzz.web.repository.SectionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ganzz.web.mapper.SectionMapper.mapToSection;
+import static com.ganzz.web.mapper.SectionMapper.mapToSectionDto;
 
 
 @Service
@@ -21,7 +25,7 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public List<SectionDto> findAllSections() {
         List<Section> sections = sectionRepository.findAll();
-        return sections.stream().map((section) -> mapToSectionDto(section)).collect(Collectors.toList());
+        return sections.stream().map(SectionMapper::mapToSectionDto).collect(Collectors.toList());
     }
 
     @Override
@@ -59,41 +63,7 @@ public class SectionServiceImpl implements SectionService {
             sections = sectionRepository.searchSections(query);
         }
         return sections.stream()
-                .map(this::mapToSectionDto)
+                .map(SectionMapper::mapToSectionDto)
                 .collect(Collectors.toList());
-    }
-
-
-    private Section mapToSection(SectionDto sectionDto) {
-        Section section = Section.builder()
-                .id(sectionDto.getId())
-                .title(sectionDto.getTitle())
-                .content(sectionDto.getContent())
-                .category(sectionDto.getCategory())
-                .contactInfo(sectionDto.getContactInfo())
-                .photoUrl(sectionDto.getPhotoUrl())
-                .createdOn(sectionDto.getCreatedOn())
-                .updatedOn(sectionDto.getUpdatedOn())
-                .openingHours(sectionDto.getOpeningHours())
-                .location(sectionDto.getLocation())
-                .build();
-        return section;
-    }
-
-    private SectionDto mapToSectionDto(Section section) {
-        SectionDto sectionDto = SectionDto.builder()
-                .id(section.getId())
-                .title(section.getTitle())
-                .content(section.getContent())
-                .category(section.getCategory())
-                .contactInfo(section.getContactInfo())
-                .photoUrl(section.getPhotoUrl())
-                .createdOn(section.getCreatedOn())
-                .updatedOn(section.getUpdatedOn())
-                .openingHours(section.getOpeningHours())
-                .location(section.getLocation())
-                .build();
-
-        return sectionDto;
     }
 }
