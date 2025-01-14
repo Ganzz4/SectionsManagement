@@ -1,15 +1,13 @@
 package com.ganzz.web.controllers;
 
 import com.ganzz.web.dto.EventDto;
+import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Event;
 import com.ganzz.web.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +36,14 @@ public class EventController {
     public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto, Model model) {
         eventService.createEvent(sectionId, eventDto);
         return "redirect:/sections/" + sectionId;
+    }
+
+    @GetMapping("/events/search")
+    public String searchSection(@RequestParam(value = "query") String query, Model model) {
+        List<EventDto> events = eventService.searchEvents(query);
+        model.addAttribute("events", events);
+
+        return "events-list";
     }
 
 }

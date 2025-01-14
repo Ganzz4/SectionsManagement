@@ -1,10 +1,12 @@
 package com.ganzz.web.service;
 
 import com.ganzz.web.dto.EventDto;
+import com.ganzz.web.dto.SectionDto;
 
 import java.util.List;
 
 public interface EventService {
     void createEvent(Long sectionId, EventDto eventDto);
     List<EventDto> findAllEvents();
+    List<EventDto> searchEvents(String query);
 }

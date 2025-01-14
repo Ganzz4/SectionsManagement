@@ -19,20 +19,20 @@
             </div>
 
 
-<!--            <div class="row justify-content-center mb-4">-->
-<!--                <div class="col-lg-6">-->
-<!--                    <form th:action="@{/sections/search}" class="d-flex gap-2">-->
-<!--                        <input name="query" class="form-control" type="search" placeholder="Search sections..." aria-label="Search"-->
-<!--                        >-->
-<!--                        <button type="submit" class="btn btn-primary d-inline-flex align-items-center" title="Search">-->
-<!--                            <i class="bi bi-search"></i>-->
-<!--                        </button>-->
-<!--                        <a th:href="@{/sections}" class="btn btn-secondary d-inline-flex align-items-center" title="Reset">-->
-<!--                            <i class="bi bi-arrow-clockwise"></i>-->
-<!--                        </a>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-6">
+                    <form th:action="@{/events/search}" class="d-flex gap-2">
+                        <input name="query" class="form-control" type="search" placeholder="Search events..." aria-label="Search"
+                        >
+                        <button type="submit" class="btn btn-primary d-inline-flex align-items-center" title="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <a th:href="@{/events}" class="btn btn-secondary d-inline-flex align-items-center" title="Reset">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+                    </form>
+                </div>
+            </div>
             <div class="row">
                 <div th:each="event : ${events}" class="col-lg-6 mb-4">
                     <div class="position-relative">

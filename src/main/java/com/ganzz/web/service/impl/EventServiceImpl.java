@@ -1,7 +1,9 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.EventDto;
+import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.mapper.EventMapper;
+import com.ganzz.web.mapper.SectionMapper;
 import com.ganzz.web.models.Event;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.repository.EventRepository;
@@ -35,4 +37,16 @@ public class EventServiceImpl implements EventService {
         return events.stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
     }
 
+    @Override
+    public List<EventDto> searchEvents(String query) {
+        List<Event> events;
+        if (query == null || query.trim().isEmpty()) {
+            events = eventRepository.findAll();
+        } else {
+            events = eventRepository.searchEvents(query);
+        }
+        return events.stream()
+                .map(EventMapper::mapToEventDto)
+                .collect(Collectors.toList());
+    }
 }
