@@ -90,7 +90,7 @@ public class SectionController {
     }
 
     @GetMapping("/sections/{sectionId}/edit")
-    public String editSection(@PathVariable("sectionId") long sectionId, Model model) {
+    public String editSectionForm(@PathVariable("sectionId") long sectionId, Model model) {
         SectionDto sectionDto = sectionService.findSectionById(sectionId);
         model.addAttribute("section", sectionDto);
 
@@ -105,6 +105,7 @@ public class SectionController {
 
         if (bindingResult.hasErrors()) {
             addCategoriesToModel(model);
+            model.addAttribute("section", sectionDto);
             return "section-edit";
         }
         sectionDto.setId(sectionId);

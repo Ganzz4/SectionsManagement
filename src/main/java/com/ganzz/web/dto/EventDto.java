@@ -1,6 +1,7 @@
 package com.ganzz.web.dto;
 
 
+import com.ganzz.web.models.Section;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,12 +17,13 @@ import java.time.LocalDateTime;
 public class EventDto {
     private Long id;
     private String name;
-    @DateTimeFormat(pattern = "dd-MM-yyyy'T'HH-mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startTime;
-    @DateTimeFormat(pattern = "dd-MM-yyyy'T'HH-mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
     private String type;
     private String photoUrl;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private Section section;
 }

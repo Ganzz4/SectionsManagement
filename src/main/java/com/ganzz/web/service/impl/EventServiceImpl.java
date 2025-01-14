@@ -55,4 +55,9 @@ public class EventServiceImpl implements EventService {
     public EventDto findByEventId(Long eventId) {
         return mapToEventDto(eventRepository.findById(eventId).get());
     }
+
+    @Override
+    public void updateEvent(EventDto eventDto) {
+        eventRepository.save(mapToEvent(eventDto));
+    }
 }

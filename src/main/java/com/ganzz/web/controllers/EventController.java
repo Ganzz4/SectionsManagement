@@ -1,12 +1,13 @@
 package com.ganzz.web.controllers;
 
 import com.ganzz.web.dto.EventDto;
-import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Event;
 import com.ganzz.web.service.EventService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,16 @@ public class EventController {
         model.addAttribute("event", event);
         return "event-create";
     }
+
+    @GetMapping("/events/{eventId}/edit")
+    public String editEventForm(@PathVariable("eventId") long eventId, Model model) {
+        EventDto eventDto = eventService.findByEventId(eventId);
+        model.addAttribute("event", eventDto);
+
+        return "event-edit";
+    }
+
+
 
     @GetMapping("/events")
     public String eventList(Model model) {
@@ -62,12 +73,30 @@ public class EventController {
     }
 
 
-    @PostMapping("/events/{sectionId}")
-    public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto, Model model) {
-        eventService.createEvent(sectionId, eventDto);
-        return "redirect:/sections/" + sectionId;
+    @PostMapping("/events/{eventId}/edit")
+    public String updateEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute("event") EventDto eventDto
+            , BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("event", eventDto);
+            return "event-edit";
+        }
+
+        EventDto existingEvent = eventService.findByEventId(eventId);
+        eventDto.setSection(existingEvent.getSection());
+
+        eventDto.setId(eventId);
+        eventService.updateEvent(eventDto);
+        return "redirect:/events";
     }
 
-
-
+    @PostMapping("/events/{sectionId}")
+    public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto,BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("event", eventDto);
+            return "event-edit";
+        }
+        eventService.createEvent(sectionId, eventDto);
+        return "redirect:/events/" + sectionId;
+    }
 }
