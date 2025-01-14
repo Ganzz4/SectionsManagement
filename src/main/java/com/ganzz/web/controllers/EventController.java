@@ -99,4 +99,10 @@ public class EventController {
         eventService.createEvent(sectionId, eventDto);
         return "redirect:/events/" + sectionId;
     }
+
+    @DeleteMapping("/events/{eventId}/delete")
+    public String deleteEvent(@PathVariable("eventId") long eventId, Model model) {
+        eventService.delete(eventId);
+        return "redirect:/events";
+    }
 }
