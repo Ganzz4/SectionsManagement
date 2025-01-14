@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class EventController {
@@ -23,6 +25,14 @@ public class EventController {
         model.addAttribute("event", event);
         return "event-create";
     }
+
+    @GetMapping("/events")
+    public String eventList(Model model) {
+        List<EventDto> events = eventService.findAllEvents();
+        model.addAttribute("events", events);
+        return "events-list";
+    }
+
 
     @PostMapping("/events/{sectionId}")
     public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto, Model model) {

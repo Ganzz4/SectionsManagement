@@ -1,17 +1,14 @@
 package com.ganzz.web.dto;
 
 import com.ganzz.web.models.Category;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -33,4 +30,5 @@ public class SectionDto {
     private String contactInfo;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private List<EventDto> events;
 }

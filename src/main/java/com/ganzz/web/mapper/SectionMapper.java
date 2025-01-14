@@ -3,6 +3,8 @@ package com.ganzz.web.mapper;
 import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Section;
 
+import java.util.stream.Collectors;
+
 public class SectionMapper {
     public static Section mapToSection(SectionDto sectionDto) {
         return Section.builder()
@@ -32,6 +34,7 @@ public class SectionMapper {
                 .updatedOn(section.getUpdatedOn())
                 .openingHours(section.getOpeningHours())
                 .location(section.getLocation())
+                .events(section.getEvents().stream().map((EventMapper::mapToEventDto)).collect(Collectors.toList()))
                 .build();
     }
 }
