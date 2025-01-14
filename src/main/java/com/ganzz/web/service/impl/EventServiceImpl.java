@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.ganzz.web.mapper.EventMapper.mapToEvent;
+import static com.ganzz.web.mapper.EventMapper.mapToEventDto;
 
 @RequiredArgsConstructor
 @Service
@@ -48,5 +49,10 @@ public class EventServiceImpl implements EventService {
         return events.stream()
                 .map(EventMapper::mapToEventDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public EventDto findByEventId(Long eventId) {
+        return mapToEventDto(eventRepository.findById(eventId).get());
     }
 }

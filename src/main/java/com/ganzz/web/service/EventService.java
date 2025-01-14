@@ -9,4 +9,6 @@ public interface EventService {
     void createEvent(Long sectionId, EventDto eventDto);
     List<EventDto> findAllEvents();
     List<EventDto> searchEvents(String query);
+
+    EventDto findByEventId(Long eventId);
 }

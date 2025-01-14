@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Section Detail</title>
+</head>
+<body class="d-flex flex-column">
+<section layout:fragment="body">
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder" th:text="${event.name}"></h1>
+                <p class="lead mb-0">Text</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <!-- Featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..."/></a>
+                    <div class="card-body">
+
+                        <div class="small text-muted" th:text="${formattedCreatedOn}"></div>
+                        <h2 class="card-title mb-4">About this event</h2>
+
+                        <h4 class="card-title">Type</h4>
+                        <p class="card-text" th:text="${event.type}"></p>
+
+                        <h4 class="card-title">Start Time</h4>
+                        <p class="card-text" th:text="${formattedStartTime}"></p>
+
+                        <h4 class="card-title">End Time</h4>
+                        <p class="card-text" th:text="${formattedEndTime}"></p>
+
+                                    <div class="d-flex gap-2">
+<!--                                      <a class="btn btn-primary" th:href="@{/sections/{sectionId}/edit(sectionId=${section.id})}">Edit</a>-->
+
+<!--                                      <form th:action="@{/sections/{sectionId}/delete(sectionId=${section.id})}" method="post">-->
+<!--                                        <input type="hidden" name="_method" value="delete" />-->
+<!--                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this section?');">Delete</button>-->
+<!--                                      </form>-->
+<!--                                        <a class="btn btn-primary" th:href="@{/events/{sectionId}/new(sectionId=${section.id})}">Create Event</a>-->
+                                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Enter search term..."
+                                   aria-label="Enter search term..." aria-describedby="button-search"/>
+                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">Sport</a></li>
+                                    <li><a href="#!">Creativity</a></li>
+                                    <li><a href="#!">Education</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
+                        use, and feature the Bootstrap 5 card component!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+</body>
+</html>
