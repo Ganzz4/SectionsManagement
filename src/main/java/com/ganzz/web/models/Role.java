@@ -1,6 +1,7 @@
 package com.ganzz.web.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Role cannot be empty")
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
