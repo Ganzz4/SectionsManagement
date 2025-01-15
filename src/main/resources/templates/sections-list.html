@@ -13,6 +13,9 @@ layout:decorate="~{layout}">
 
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
+            <div th:if="${param.success}" class="mb-5 alert alert-success">
+                You are registered successfully!
+            </div>
             <div class="text-center mb-5">
                 <h1 class="fw-bolder">Sections Near You</h1>
                 <p class="lead fw-normal text-muted mb-0">Sections found in your area</p>

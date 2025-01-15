@@ -1,14 +1,12 @@
 package com.ganzz.web.dto;
 
-import com.ganzz.web.models.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 
@@ -18,6 +16,8 @@ public class RegistrationDto {
     private Long id;
 
     @NotBlank(message = "Username cannot be empty")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]*$", message = "Username can contain only letters, numbers, - and _")
     @Column(unique = true)
     private String username;
 
@@ -26,7 +26,6 @@ public class RegistrationDto {
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Password cannot be empty")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,20}$", message = "Password must be between 8 and 20 characters and contain at least one letter and one number")
     private String password;
 }

@@ -7,11 +7,12 @@ import com.ganzz.web.repository.RoleRepository;
 import com.ganzz.web.repository.UserRepository;
 import com.ganzz.web.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -21,10 +22,20 @@ public class UserServiceImpl implements UserService {
     public void saveUser(RegistrationDto registrationDto) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(registrationDto.getUsername());
-        userEntity.setUsername(registrationDto.getEmail());
+        userEntity.setEmail(registrationDto.getEmail());
         userEntity.setPassword(registrationDto.getPassword());
         Role role = roleRepository.findByName("USER");
         userEntity.setRoles(Collections.singletonList(role));
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public UserEntity findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
