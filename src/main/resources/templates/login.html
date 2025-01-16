@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Login</title>
+</head>
+<section layout:fragment="body">
+    <div class="main d-flex flex-column align-items-center justify-content-center my-5">
+
+        <div class="text-center mb-5">
+            <h1 class="fw-bolder">Authorization</h1>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+
+            <div th:if="${param.error}" class="mb-5 alert alert-danger">
+                Invalid username or password.
+            </div>
+
+            <div th:if="${param.logout}" class="mb-5 alert alert-danger">
+                You are have been logged out!
+            </div>
+
+            <div class="login-form">
+                <form method="post" role="form" th:action="@{/login}">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                class="form-control"
+                                placeholder="Username">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                class="form-control"
+                                placeholder="Password">
+                    </div>
+                    <button th:href="@{/login}" value="Log in" type="submit" class="btn btn-primary">Login</button>
+                    <a th:href="@{/register}"  type="submit" class="btn btn-secondary">Don't have an account</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

@@ -15,7 +15,6 @@ public class RegistrationDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Username cannot be empty")
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     @Pattern(regexp = "^[a-zA-Z0-9_-]*$", message = "Username can contain only letters, numbers, - and _")
     @Column(unique = true)

@@ -5,6 +5,9 @@ import com.ganzz.web.models.UserEntity;
 import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AuthController {
     private final UserService userService;
 
+    @GetMapping("/login")
+    public String getLoginForm(Model model) {
+        RegistrationDto user = new RegistrationDto();
+        model.addAttribute("user", user);
+        return "login";
+    }
+
     @GetMapping("/register")
     public String getRegisterForm(Model model) {
         RegistrationDto user = new RegistrationDto();
@@ -28,12 +38,12 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("user") RegistrationDto user, BindingResult bindingResult, Model model) {
         UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
         if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            bindingResult.rejectValue("email", "email.exists", "There is already a user with that email");
+            return "redirect:/register?fail";
         }
 
         UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
         if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-            bindingResult.rejectValue("username", "username.exists", "There is already a user with that username");
+            return "redirect:/register?fail";
         }
 
 
@@ -42,6 +52,9 @@ public class AuthController {
             return "register";
         }
         userService.saveUser(user);
+
+
+
         return "redirect:/sections?success";
     }
 }
