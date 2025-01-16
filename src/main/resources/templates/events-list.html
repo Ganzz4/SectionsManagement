@@ -7,45 +7,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Events List</title>
+    <style>
+        .card-link-wrapper {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card-link-wrapper:hover {
+            color: inherit;
+        }
+        .card {
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
-
     <section layout:fragment="body" class="py-5">
         <div class="container px-5 my-5">
             <div class="text-center mb-5">
-                <h1 class="fw-bolder">Events Near You</h1>
-                <p class="lead fw-normal text-muted mb-0">Events found in your area</p>
+                <h1 class="display-4 fw-bolder">Events Near You</h1>
+                <p class="lead text-muted mb-0">Events found in your area</p>
             </div>
 
-
-            <div class="row justify-content-center mb-4">
+            <div class="row justify-content-center mb-5">
                 <div class="col-lg-6">
                     <form th:action="@{/events/search}" class="d-flex gap-2">
-                        <input name="query" class="form-control" type="search" placeholder="Search events..." aria-label="Search"
-                        >
-                        <button type="submit" class="btn btn-primary d-inline-flex align-items-center" title="Search">
-                            <i class="bi bi-search"></i>
-                        </button>
-                        <a th:href="@{/events}" class="btn btn-secondary d-inline-flex align-items-center" title="Reset">
-                            <i class="bi bi-arrow-clockwise"></i>
-                        </a>
+                        <div class="input-group">
+                            <input name="query" class="form-control" type="search"
+                                   placeholder="Search events..." aria-label="Search">
+                            <button type="submit" class="btn btn-primary" title="Search">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <a th:href="@{/events}" class="btn btn-outline-secondary" title="Reset">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="row">
-                <div th:each="event : ${events}" class="col-lg-6 mb-4">
-                    <div class="position-relative">
-                        <div class="ratio ratio-16x9 mb-3" >
-                            <img class="rounded-3 object-fit-cover" th:src="${event.photoUrl}"  alt="..."/>
+
+            <div class="row g-4">
+                <div th:each="event : ${events}" class="col-lg-6">
+                    <a th:href="@{/events/{eventId}(eventId=${event.id})}"
+                       class="card-link-wrapper">
+                        <div class="card h-100 shadow-sm">
+                            <div class="ratio ratio-16x9">
+                                <img class="card-img-top object-fit-cover" th:src="${event.photoUrl}" alt="Event image">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title h4 fw-bold" th:text="${event.name}">
+                                    Event name
+                                </h3>
+                            </div>
                         </div>
-                        <a th:text="${event.name}"
-                           class="h3 fw-bolder text-decoration-none link-dark d-block mb-3"
-                           href="#!"></a>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId = ${event.id})}">View</a>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,16 +1,23 @@
 package com.ganzz.web.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
 
     private static final String[] PUBLIC_URLS = {"/login", "/register/**", "/sections/**", "/css/**", "/js/**"};
     private static final String LOGIN_PAGE = "/login";
@@ -18,6 +25,12 @@ public class SecurityConfig {
     private static final String LOGIN_FAILURE_URL = "/login?error=true";
     private static final String DEFAULT_SUCCESS_URL = "/sections";
     private static final String LOGOUT_URL = "/logout";
+
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,5 +64,9 @@ public class SecurityConfig {
         http.logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
                 .permitAll());
+    }
+
+    public void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
