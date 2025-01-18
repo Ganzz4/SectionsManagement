@@ -19,7 +19,7 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
 
-    private static final String[] PUBLIC_URLS = {"/login", "/register/**", "/sections/**", "/css/**", "/js/**"};
+    private static final String[] PUBLIC_URLS = {"/login", "/register/**", "/sections/**","/events/**","/assets/**", "/css/**", "/js/**"};
     private static final String LOGIN_PAGE = "/login";
     private static final String LOGIN_PROCESSING_URL = "/login";
     private static final String LOGIN_FAILURE_URL = "/login?error=true";

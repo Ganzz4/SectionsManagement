@@ -2,7 +2,10 @@ package com.ganzz.web.controllers;
 
 import com.ganzz.web.dto.EventDto;
 import com.ganzz.web.models.Event;
+import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.EventService;
+import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
+    private final UserService userService;
 
     @GetMapping("/events/{sectionId}/new")
     public String createEventForm(@PathVariable Long sectionId, Model model) {
@@ -35,7 +39,6 @@ public class EventController {
 
         return "event-edit";
     }
-
 
 
     @GetMapping("/events")
@@ -57,6 +60,14 @@ public class EventController {
     @GetMapping("/events/{eventId}")
     public String viewEvent(@PathVariable(value = "eventId") Long eventId, Model model) {
         EventDto eventDto = eventService.findByEventId(eventId);
+
+
+        UserEntity user = new UserEntity();
+        String username = SecurityUtil.getSessionUser();
+        if (username != null) {
+            user = userService.findByUsername(username);
+        }
+        model.addAttribute("user", user);
 
         model.addAttribute("event", eventDto);
         model.addAttribute("formattedCreatedOn", formatDateTime(eventDto.getCreatedOn()));
@@ -91,7 +102,7 @@ public class EventController {
     }
 
     @PostMapping("/events/{sectionId}")
-    public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto,BindingResult bindingResult, Model model) {
+    public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("event", eventDto);
             return "event-edit";

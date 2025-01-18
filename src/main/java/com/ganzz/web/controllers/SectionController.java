@@ -4,9 +4,13 @@ import com.ganzz.web.dto.CategoryDto;
 import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.models.Category;
 import com.ganzz.web.models.Section;
+import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.CategoryService;
 import com.ganzz.web.service.SectionService;
+import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +22,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class SectionController {
-    private SectionService sectionService;
-    private CategoryService categoryService;
+    private final SectionService sectionService;
+    private final CategoryService categoryService;
+    private final UserService userService;
 
-    @Autowired
-    public SectionController(SectionService sectionService, CategoryService categoryService) {
-        this.sectionService = sectionService;
-        this.categoryService = categoryService;
-    }
+
 
     private void addCategoriesToModel(Model model) {
         List<CategoryDto> categories = categoryService.findAllCategories();
@@ -51,6 +53,14 @@ public class SectionController {
         }else{
             formattedDate = "";
         }
+
+        UserEntity user = new UserEntity();
+        String username = SecurityUtil.getSessionUser();
+        if (username != null) {
+            user = userService.findByUsername(username);
+        }
+        model.addAttribute("user", user);
+
         model.addAttribute("formattedDate", formattedDate);
         model.addAttribute("section", sectionDto);
         return "section-detail";

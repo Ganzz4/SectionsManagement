@@ -41,7 +41,7 @@
 
                         <h4 class="card-title">Description</h4>
                         <p class="card-text" th:text="${section.content}"></p>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2" th:if="${user.id} == ${section.createdBy.id}">
                             <a class="btn btn-primary" th:href="@{/sections/{sectionId}/edit(sectionId=${section.id})}">Edit</a>
                             <form th:action="@{/sections/{sectionId}/delete(sectionId=${section.id})}" method="post">
                                 <input type="hidden" name="_method" value="delete"/>
