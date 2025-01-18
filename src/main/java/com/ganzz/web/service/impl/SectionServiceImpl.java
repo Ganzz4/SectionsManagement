@@ -3,6 +3,9 @@ package com.ganzz.web.service.impl;
 import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.mapper.SectionMapper;
 import com.ganzz.web.models.Section;
+import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.repository.UserRepository;
+import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.SectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import static com.ganzz.web.mapper.SectionMapper.mapToSectionDto;
 @RequiredArgsConstructor
 public class SectionServiceImpl implements SectionService {
     private final SectionRepository sectionRepository;
+    private final UserRepository userRepository;
     private final PhotoServiceImpl photoService;
 
 
@@ -30,9 +34,14 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public Section saveSection(SectionDto sectionDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
+
         sectionDto.setPhotoUrl(photoService.getValidPhotoUrl(sectionDto.getPhotoUrl()));
 
         Section section = mapToSection(sectionDto);
+
+        section.setCreatedBy(user);
         return sectionRepository.save(section);
     }
 
@@ -44,9 +53,14 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public void updateSection(SectionDto sectionDto) {
+        String username = SecurityUtil.getSessionUser();
+        UserEntity user = userRepository.findByUsername(username);
+
         sectionDto.setPhotoUrl(photoService.getValidPhotoUrl(sectionDto.getPhotoUrl()));
 
         Section section = mapToSection(sectionDto);
+
+        section.setCreatedBy(user);
         sectionRepository.save(section);
     }
 

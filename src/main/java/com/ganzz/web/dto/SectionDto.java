@@ -1,6 +1,7 @@
 package com.ganzz.web.dto;
 
 import com.ganzz.web.models.Category;
+import com.ganzz.web.models.UserEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -30,5 +31,6 @@ public class SectionDto {
     private String contactInfo;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
+    private UserEntity createdBy;
     private List<EventDto> events;
 }

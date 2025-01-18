@@ -18,6 +18,7 @@ public class SectionMapper {
                 .updatedOn(sectionDto.getUpdatedOn())
                 .openingHours(sectionDto.getOpeningHours())
                 .location(sectionDto.getLocation())
+                .createdBy(sectionDto.getCreatedBy())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class SectionMapper {
                 .updatedOn(section.getUpdatedOn())
                 .openingHours(section.getOpeningHours())
                 .location(section.getLocation())
+                .createdBy(section.getCreatedBy())
                 .events(section.getEvents().stream().map((EventMapper::mapToEventDto)).collect(Collectors.toList()))
                 .build();
     }
