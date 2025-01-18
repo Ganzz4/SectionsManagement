@@ -8,7 +8,9 @@ import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
 import com.ganzz.web.service.SectionService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,13 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CategoryController {
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @GetMapping("/categories")
     public String listCategories(Model model) {
@@ -32,9 +31,8 @@ public class CategoryController {
         return "categories-list";
     }
 
-
     @DeleteMapping("/categories/{categoryId}/delete")
-    public String deleteSection(@PathVariable("categoryId") long categoryId, Model model) {
+    public String deleteCategory(@PathVariable("categoryId") long categoryId, Model model) {
         categoryService.delete(categoryId);
         return "redirect:/categories";
     }

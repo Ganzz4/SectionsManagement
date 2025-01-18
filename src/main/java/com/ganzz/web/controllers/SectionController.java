@@ -12,6 +12,7 @@ import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,6 +67,7 @@ public class SectionController {
         return "section-detail";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/sections/new")
     public String createSectionForm(Model model) {
         Section section = new Section();
@@ -75,6 +77,7 @@ public class SectionController {
         return "section-create";
     }
 
+    @PreAuthorize("@securityExpression.canModifySection(#sectionId)")
     @DeleteMapping("/sections/{sectionId}/delete")
     public String deleteSection(@PathVariable("sectionId") long sectionId, Model model) {
         sectionService.delete(sectionId);
@@ -89,6 +92,7 @@ public class SectionController {
         return "sections-list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/sections/new")
     public String saveSection(@Valid @ModelAttribute("section") SectionDto sectionDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -99,6 +103,7 @@ public class SectionController {
         return "redirect:/sections";
     }
 
+    @PreAuthorize("@securityExpression.canModifySection(#sectionId)")
     @GetMapping("/sections/{sectionId}/edit")
     public String editSectionForm(@PathVariable("sectionId") long sectionId, Model model) {
         SectionDto sectionDto = sectionService.findSectionById(sectionId);
@@ -109,6 +114,7 @@ public class SectionController {
         return "section-edit";
     }
 
+    @PreAuthorize("@securityExpression.canModifySection(#sectionId)")
     @PostMapping("/sections/{sectionId}/edit")
     public String editSection(@PathVariable("sectionId") Long sectionId, @Valid @ModelAttribute("section") SectionDto sectionDto
             , BindingResult bindingResult, Model model) {

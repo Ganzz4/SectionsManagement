@@ -8,6 +8,7 @@ import com.ganzz.web.service.EventService;
 import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class EventController {
     private final EventService eventService;
     private final UserService userService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/events/{sectionId}/new")
     public String createEventForm(@PathVariable Long sectionId, Model model) {
         Event event = new Event();
@@ -32,6 +34,7 @@ public class EventController {
         return "event-create";
     }
 
+    @PreAuthorize("@securityExpression.canModifyEvent(#eventId)")
     @GetMapping("/events/{eventId}/edit")
     public String editEventForm(@PathVariable("eventId") long eventId, Model model) {
         EventDto eventDto = eventService.findByEventId(eventId);
@@ -83,7 +86,7 @@ public class EventController {
                 .orElse("");
     }
 
-
+    @PreAuthorize("@securityExpression.canModifyEvent(#eventId)")
     @PostMapping("/events/{eventId}/edit")
     public String updateEvent(@PathVariable("eventId") Long eventId, @Valid @ModelAttribute("event") EventDto eventDto
             , BindingResult bindingResult, Model model) {
@@ -101,6 +104,7 @@ public class EventController {
         return "redirect:/events";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/events/{sectionId}")
     public String createEvent(@PathVariable Long sectionId, @ModelAttribute("event") EventDto eventDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -111,6 +115,7 @@ public class EventController {
         return "redirect:/events/" + sectionId;
     }
 
+    @PreAuthorize("@securityExpression.canModifyEvent(#eventId)")
     @DeleteMapping("/events/{eventId}/delete")
     public String deleteEvent(@PathVariable("eventId") long eventId, Model model) {
         eventService.delete(eventId);
