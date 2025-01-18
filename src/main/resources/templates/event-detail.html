@@ -40,7 +40,7 @@
                         <h4 class="card-title">End Time</h4>
                         <p class="card-text" th:text="${formattedEndTime}"></p>
 
-                                    <div class="d-flex gap-2" th:if="${user.id} == ${event.section.createdBy.id}">
+                                    <div class="d-flex gap-2" th:if="${user.id} == ${event.section.createdBy.id} or ${#authorization.expression('hasAuthority(''ADMIN'')')}">
                                       <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit</a>
 
                                       <form th:action="@{/events/{eventId}/delete(eventId=${event.id})}" method="post">
