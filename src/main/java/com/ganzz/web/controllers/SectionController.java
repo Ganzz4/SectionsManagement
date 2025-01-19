@@ -2,7 +2,6 @@ package com.ganzz.web.controllers;
 
 import com.ganzz.web.dto.CategoryDto;
 import com.ganzz.web.dto.SectionDto;
-import com.ganzz.web.models.Category;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.models.UserEntity;
 import com.ganzz.web.security.SecurityUtil;
@@ -11,7 +10,6 @@ import com.ganzz.web.service.SectionService;
 import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -32,7 +29,6 @@ public class SectionController {
     private final SectionService sectionService;
     private final CategoryService categoryService;
     private final UserService userService;
-
 
 
     private void addCategoriesToModel(Model model) {

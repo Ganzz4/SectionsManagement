@@ -107,7 +107,6 @@
                                 </div>
                                 <div class="card-body">
                                     <h3 class="card-title h4" th:text="${event.name}"></h3>
-                                    <p class="card-text text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
                                     <a class="btn btn-outline-primary" th:href="@{/events/{eventId}(eventId = ${event.id})}">
                                         Read More
                                         <i class="bi bi-arrow-right ms-2"></i>
@@ -117,27 +116,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Pagination -->
-                <nav aria-label="Pagination">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link rounded-start" href="#" tabindex="-1">
-                                <i class="bi bi-chevron-left"></i> Newer
-                            </a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                        <li class="page-item">
-                            <a class="page-link rounded-end" href="#!">
-                                Older <i class="bi bi-chevron-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
