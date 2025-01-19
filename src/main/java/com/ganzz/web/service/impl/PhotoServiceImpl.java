@@ -13,7 +13,7 @@ import java.nio.file.*;
 @Service
 public class PhotoServiceImpl implements PhotoService {
 
-    @Value("${app.default-photo:/images/default-section.jpg}")
+    @Value("${app.default-photo}")
     private String defaultPhoto;
 
     public String getValidPhotoUrl(String photoUrl) {

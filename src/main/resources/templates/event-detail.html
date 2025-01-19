@@ -6,90 +6,105 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Section Detail</title>
+    <title>Event Detail</title>
 </head>
-<body class="d-flex flex-column">
+<body class="d-flex flex-column bg-light">
 <section layout:fragment="body">
-    <header class="py-5 bg-light border-bottom mb-4">
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder" th:text="${event.name}"></h1>
-                <p class="lead mb-0">Text</p>
+    <!-- Image header -->
+    <header class="py-5 text-white position-relative overflow-hidden"
+            th:style="'background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(' + ${event.photoUrl} + ') no-repeat center center; background-size: cover; height: 400px;'">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="text-center w-100">
+                <h1 class="display-4 fw-bold" th:text="${event.name}"></h1>
+                <p class="lead mb-0 text-white-50" th:text="${event.type}"></p>
             </div>
         </div>
     </header>
-    <!-- Page content-->
-    <div class="container">
-        <div class="row">
-            <!-- Blog entries-->
-            <div class="col-lg-8">
-                <!-- Featured blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..."/></a>
-                    <div class="card-body">
 
-                        <div class="small text-muted" th:text="${formattedCreatedOn}"></div>
-                        <h2 class="card-title mb-4">About this event</h2>
+    <!-- Main content -->
+    <div class="container position-relative" style="margin-top: -100px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Main content card -->
+                <div class="card shadow-lg mb-5 bg-white rounded">
+                    <div class="card-body p-5">
+                        <div class="mb-4">
+                            <div class="small text-muted" th:text="${formattedCreatedOn}"></div>
+                            <h2 class="card-title h1 mb-4 text-primary">About this event</h2>
 
-                        <h4 class="card-title">Type</h4>
-                        <p class="card-text" th:text="${event.type}"></p>
-
-                        <h4 class="card-title">Start Time</h4>
-                        <p class="card-text" th:text="${formattedStartTime}"></p>
-
-                        <h4 class="card-title">End Time</h4>
-                        <p class="card-text" th:text="${formattedEndTime}"></p>
-
-                                    <div class="d-flex gap-2" th:if="${user.id} == ${event.section.createdBy.id} or ${#authorization.expression('hasAuthority(''ADMIN'')')}">
-                                      <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit</a>
-
-                                      <form th:action="@{/events/{eventId}/delete(eventId=${event.id})}" method="post">
-                                        <input type="hidden" name="_method" value="delete" />
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this event?');">Delete</button>
-                                      </form>
+                            <!-- Info grid -->
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <i class="bi bi-tag-fill text-primary me-2 fs-4"></i>
+                                                <h4 class="card-title mb-0">Type</h4>
+                                            </div>
+                                            <p class="card-text" th:text="${event.type}"></p>
+                                        </div>
                                     </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Side widgets-->
-            <div class="col-lg-4">
-                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                   aria-label="Enter search term..." aria-describedby="button-search"/>
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Sport</a></li>
-                                    <li><a href="#!">Creativity</a></li>
-                                    <li><a href="#!">Education</a></li>
-                                </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <i class="bi bi-calendar-event-fill text-primary me-2 fs-4"></i>
+                                                <h4 class="card-title mb-0">Start Time</h4>
+                                            </div>
+                                            <p class="card-text" th:text="${formattedStartTime}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <i class="bi bi-calendar-check-fill text-primary me-2 fs-4"></i>
+                                                <h4 class="card-title mb-0">End Time</h4>
+                                            </div>
+                                            <p class="card-text" th:text="${formattedEndTime}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Action buttons -->
+                            <div class="d-flex gap-2 flex-wrap"
+                                 th:if="${user.id} == ${event.section.createdBy.id} or ${#authorization.expression('hasAuthority(''ADMIN'')')}">
+                                <a class="btn btn-primary px-4 py-2"
+                                   th:href="@{/events/{eventId}/edit(eventId=${event.id})}">
+                                    <i class="bi bi-pencil-fill me-2"></i>Edit
+                                </a>
+                                <form th:action="@{/events/{eventId}/delete(eventId=${event.id})}" method="post">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-danger px-4 py-2"
+                                            onclick="return confirm('Are you sure you want to delete this event?');">
+                                        <i class="bi bi-trash-fill me-2"></i>Delete
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Side widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
-                        use, and feature the Bootstrap 5 card component!
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-    </div>
 </section>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .hover-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+</th:block>
 </body>
 </html>
