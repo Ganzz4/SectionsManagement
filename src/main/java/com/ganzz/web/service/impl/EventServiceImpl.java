@@ -1,9 +1,7 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.EventDto;
-import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.mapper.EventMapper;
-import com.ganzz.web.mapper.SectionMapper;
 import com.ganzz.web.models.Event;
 import com.ganzz.web.models.Section;
 import com.ganzz.web.repository.EventRepository;
@@ -23,13 +21,16 @@ import static com.ganzz.web.mapper.EventMapper.mapToEventDto;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final SectionRepository sectionRepository;
+    private final PhotoServiceImpl photoService;
 
     @Override
-    public void createEvent(Long sectionId, EventDto eventDto) {
+    public Long createEvent(Long sectionId, EventDto eventDto) {
         Section section = sectionRepository.findById(sectionId).get();
+        eventDto.setPhotoUrl(photoService.getValidPhotoUrl(eventDto.getPhotoUrl()));
         Event event = mapToEvent(eventDto);
         event.setSection(section);
-        eventRepository.save(event);
+        Event savedEvent = eventRepository.save(event);
+        return savedEvent.getId();
     }
 
     @Override
@@ -58,6 +59,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void updateEvent(EventDto eventDto) {
+        eventDto.setPhotoUrl(photoService.getValidPhotoUrl(eventDto.getPhotoUrl()));
         eventRepository.save(mapToEvent(eventDto));
     }
 

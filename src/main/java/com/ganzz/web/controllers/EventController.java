@@ -8,6 +8,7 @@ import com.ganzz.web.service.EventService;
 import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,13 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class EventController {
+    @Value("${app.default-photo:/images/default-section.jpg}")
+    private String defaultEventPhoto;
+
     private final EventService eventService;
     private final UserService userService;
+
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/events/{sectionId}/new")
@@ -39,6 +45,7 @@ public class EventController {
     public String editEventForm(@PathVariable("eventId") long eventId, Model model) {
         EventDto eventDto = eventService.findByEventId(eventId);
         model.addAttribute("event", eventDto);
+        model.addAttribute("defaultPhotoPath", defaultEventPhoto);
 
         return "event-edit";
     }
@@ -112,7 +119,8 @@ public class EventController {
             return "event-edit";
         }
         eventService.createEvent(sectionId, eventDto);
-        return "redirect:/events/" + sectionId;
+        Long eventId = eventService.createEvent(sectionId, eventDto);
+        return "redirect:/events/" + eventId;
     }
 
     @PreAuthorize("@securityExpression.canModifyEvent(#eventId)")

@@ -12,6 +12,7 @@ import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class SectionController {
+    @Value("${app.default-photo:/images/default-section.jpg}")
+    private String defaultPhoto;
+
     private final SectionService sectionService;
     private final CategoryService categoryService;
     private final UserService userService;
@@ -108,7 +112,7 @@ public class SectionController {
     public String editSectionForm(@PathVariable("sectionId") long sectionId, Model model) {
         SectionDto sectionDto = sectionService.findSectionById(sectionId);
         model.addAttribute("section", sectionDto);
-
+        model.addAttribute("defaultPhotoPath", defaultPhoto);
         addCategoriesToModel(model);
 
         return "section-edit";

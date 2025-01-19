@@ -5,113 +5,117 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Section Edit</title>
+    <meta charset="UTF-8">
+    <title>Section Edit</title>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-  <section layout:fragment="body" class="py-5">
-    <div class="container">
-      <form role="form" method="post" th:action="@{/sections/{sectionId}/edit(sectionId= ${section.getId()})}" th:object="${section}">
-        <input type="hidden" th:field="*{id}">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputTitle">Title</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="inputTitle"
-                    placeholder="Title"
-                    name="title"
-                    th:field="*{title}"
-             >
-            <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPhotoUrl">PhotoUrl</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="inputPhotoUrl"
-                    placeholder="PhotoUrl"
-                    name="photoUrl"
-                    th:field="*{photoUrl}">
-            <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
-          </div>
+    <section layout:fragment="body" class="py-5">
+        <div class="container">
+            <form role="form" method="post" th:action="@{/sections/{sectionId}/edit(sectionId= ${section.getId()})}"
+                  th:object="${section}">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputTitle">Title</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputTitle"
+                                placeholder="Title"
+                                name="title"
+                                th:field="*{title}"
+                        >
+                        <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPhotoUrl">PhotoUrl</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputPhotoUrl"
+                                placeholder="PhotoUrl"
+                                name="photoUrl"
+                                th:value="${section.photoUrl != defaultPhotoPath ? section.photoUrl : ''}"
+                        >
+                        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLocation">Location</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputLocation"
+                            placeholder="Chisinau, Centru"
+                            name="location"
+                            th:field="*{location}">
+                    <p th:if="${#fields.hasErrors('location')}" class="text-danger" th:errors="*{location}"></p>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputState">Category</label>
+                    <select
+                            id="inputState"
+                            class="form-control"
+                            name="category"
+                            th:field="*{category}">
+
+                        <option selected value="">Choose...</option>
+
+                        <th:block th:each="category : ${categories}">
+                            <option th:value="${category.id}" th:text="${category.name}"></option>
+                        </th:block>
+
+                    </select>
+                    <p th:if="${#fields.hasErrors('category')}" class="text-danger" th:errors="*{category}"></p>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="inputContent">Content</label>
+                        <textarea
+                                class="form-control"
+                                id="inputContent"
+                                placeholder="Input Content"
+                                rows="4"
+                                name="content"
+                                th:field="*{content}"></textarea>
+                        <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputOpeningHours">Opening Hours</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputOpeningHours"
+                                placeholder="Input Opening Hours"
+                                name="openingHours"
+                                th:field="*{openingHours}">
+                        <p th:if="${#fields.hasErrors('openingHours')}" class="text-danger"
+                           th:errors="*{openingHours}"></p>
+
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="inputContactInfo">Contact Info</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="inputContactInfo"
+                                placeholder="+373********"
+                                name="contactInfo"
+                                th:field="*{contactInfo}">
+                        <p th:if="${#fields.hasErrors('contactInfo')}" class="text-danger"
+                           th:errors="*{contactInfo}"></p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
         </div>
-        <div class="form-group col-md-6">
-          <label for="inputLocation">Location</label>
-          <input
-                  type="text"
-                  class="form-control"
-                  id="inputLocation"
-                  placeholder="Chisinau, Centru"
-                  name="location"
-                  th:field="*{location}">
-          <p th:if="${#fields.hasErrors('location')}" class="text-danger" th:errors="*{location}"></p>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="inputState">Category</label>
-          <select
-                  id="inputState"
-                  class="form-control"
-                  name="category"
-                  th:field="*{category}">
-
-            <option selected value="">Choose...</option>
-
-            <th:block th:each="category : ${categories}">
-              <option th:value="${category.id}" th:text="${category.name}"></option>
-            </th:block>
-
-          </select>
-          <p th:if="${#fields.hasErrors('category')}" class="text-danger" th:errors="*{category}"></p>
-        </div>
-
-        <div class="form-row mb-3">
-          <div class="form-group col-md-6">
-            <label for="inputContent">Content</label>
-            <textarea
-                    class="form-control"
-                    id="inputContent"
-                    placeholder="Input Content"
-                    rows="4"
-                    name="content"
-                    th:field="*{content}"></textarea>
-            <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label for="inputOpeningHours">Opening Hours</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="inputOpeningHours"
-                    placeholder="Input Opening Hours"
-                    name="openingHours"
-                    th:field="*{openingHours}">
-            <p th:if="${#fields.hasErrors('openingHours')}" class="text-danger" th:errors="*{openingHours}"></p>
-
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="inputContactInfo">Contact Info</label>
-            <input
-                    type="text"
-                    class="form-control"
-                    id="inputContactInfo"
-                    placeholder="+373********"
-                    name="contactInfo"
-                    th:field="*{contactInfo}">
-            <p th:if="${#fields.hasErrors('contactInfo')}" class="text-danger" th:errors="*{contactInfo}"></p>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
-      </form>
-    </div>
-  </section>
+    </section>
 </main>
 </body>
 </html>

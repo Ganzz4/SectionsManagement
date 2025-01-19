@@ -79,7 +79,7 @@
                   id="inputPhotoUrl"
                   placeholder="PhotoUrl"
                   name="photoUrl"
-                  th:field="*{photoUrl}">
+                  th:value="${event.photoUrl != defaultPhotoPath ? event.photoUrl : ''}">
           <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
 
         </div>
