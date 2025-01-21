@@ -25,7 +25,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Long createEvent(Long sectionId, EventDto eventDto) {
-        Section section = sectionRepository.findById(sectionId).get();
+        Section section = sectionRepository.findById(sectionId).orElseThrow(() -> new RuntimeException("Section not found"));
         eventDto.setPhotoUrl(photoService.getValidPhotoUrl(eventDto.getPhotoUrl()));
         Event event = mapToEvent(eventDto);
         event.setSection(section);
@@ -54,7 +54,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto findByEventId(Long eventId) {
-        return mapToEventDto(eventRepository.findById(eventId).get());
+        return mapToEventDto(eventRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found")));
     }
 
     @Override
