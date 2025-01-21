@@ -1,11 +1,10 @@
-package com.ganzz.web.service;
+package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.RegistrationDto;
 import com.ganzz.web.models.Role;
 import com.ganzz.web.models.UserEntity;
 import com.ganzz.web.repository.RoleRepository;
 import com.ganzz.web.repository.UserRepository;
-import com.ganzz.web.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
