@@ -34,7 +34,7 @@ public class PhotoServiceImpl implements PhotoService {
         }
     }
 
-    private String validateExternalUrl(String photoUrl) {
+    protected String validateExternalUrl(String photoUrl) {
         try {
             URL url = new URL(photoUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,7 @@ public class PhotoServiceImpl implements PhotoService {
         return defaultPhoto;
     }
 
-    private String validateLocalFile(String photoUrl) {
+    protected String validateLocalFile(String photoUrl) {
         try {
             Path photoPath = Paths.get(photoUrl);
             if (Files.exists(photoPath) && Files.isReadable(photoPath)) {
