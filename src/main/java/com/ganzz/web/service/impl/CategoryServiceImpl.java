@@ -1,10 +1,8 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
-import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.mapper.CategoryMapper;
 import com.ganzz.web.models.Category;
-import com.ganzz.web.models.Section;
 import com.ganzz.web.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +34,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category saveCategory(CategoryDto categoryDto) {
+    public void saveCategory(CategoryDto categoryDto) {
         Category category = mapToCategory(categoryDto);
-        return categoryRepository.save(category);
+        categoryRepository.save(category);
 
     }
 
