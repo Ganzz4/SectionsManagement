@@ -9,7 +9,6 @@ import lombok.Data;
 
 
 @Data
-
 public class RegistrationDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
