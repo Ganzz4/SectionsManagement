@@ -1,6 +1,6 @@
 package com.ganzz.web.repository;
 
-import com.ganzz.web.models.Event;
+import com.ganzz.web.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

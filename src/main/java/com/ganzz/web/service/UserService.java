@@ -1,9 +1,7 @@
 package com.ganzz.web.service;
 
 import com.ganzz.web.dto.RegistrationDto;
-import com.ganzz.web.models.UserEntity;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import com.ganzz.web.model.UserEntity;
 
 public interface UserService {
     void saveUser(RegistrationDto registrationDto);

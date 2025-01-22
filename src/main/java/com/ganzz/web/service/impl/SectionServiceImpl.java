@@ -2,8 +2,8 @@ package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.SectionDto;
 import com.ganzz.web.mapper.SectionMapper;
-import com.ganzz.web.models.Section;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.Section;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.repository.UserRepository;
 import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.SectionService;

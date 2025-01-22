@@ -1,4 +1,4 @@
-package com.ganzz.web.models;
+package com.ganzz.web.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

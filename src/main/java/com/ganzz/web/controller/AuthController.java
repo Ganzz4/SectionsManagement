@@ -1,7 +1,7 @@
-package com.ganzz.web.controllers;
+package com.ganzz.web.controller;
 
 import com.ganzz.web.dto.RegistrationDto;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

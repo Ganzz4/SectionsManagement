@@ -1,7 +1,7 @@
 package com.ganzz.web.mapper;
 
 import com.ganzz.web.dto.CategoryDto;
-import com.ganzz.web.models.Category;
+import com.ganzz.web.model.Category;
 
 public class CategoryMapper {
     public static Category mapToCategory(CategoryDto categoryDto) {

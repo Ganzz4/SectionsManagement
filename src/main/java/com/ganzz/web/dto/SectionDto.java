@@ -1,7 +1,7 @@
 package com.ganzz.web.dto;
 
-import com.ganzz.web.models.Category;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.Category;
+import com.ganzz.web.model.UserEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

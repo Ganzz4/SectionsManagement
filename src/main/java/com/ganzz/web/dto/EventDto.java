@@ -1,7 +1,7 @@
 package com.ganzz.web.dto;
 
 
-import com.ganzz.web.models.Section;
+import com.ganzz.web.model.Section;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;

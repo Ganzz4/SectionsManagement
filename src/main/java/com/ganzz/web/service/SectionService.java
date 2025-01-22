@@ -1,7 +1,7 @@
 package com.ganzz.web.service;
 
 import com.ganzz.web.dto.SectionDto;
-import com.ganzz.web.models.Section;
+import com.ganzz.web.model.Section;
 
 import java.util.List;
 

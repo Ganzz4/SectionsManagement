@@ -1,6 +1,6 @@
 package com.ganzz.web.security;
 
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,7 +1,7 @@
 package com.ganzz.web.mapper;
 
 import com.ganzz.web.dto.EventDto;
-import com.ganzz.web.models.Event;
+import com.ganzz.web.model.Event;
 
 public class EventMapper {
     public static Event mapToEvent(EventDto eventDto) {

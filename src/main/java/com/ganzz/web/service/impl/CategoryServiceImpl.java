@@ -2,7 +2,7 @@ package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
 import com.ganzz.web.mapper.CategoryMapper;
-import com.ganzz.web.models.Category;
+import com.ganzz.web.model.Category;
 import com.ganzz.web.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

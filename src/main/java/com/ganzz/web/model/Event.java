@@ -1,4 +1,4 @@
-package com.ganzz.web.models;
+package com.ganzz.web.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.repository.cdi.Eager;
 
 import java.time.LocalDateTime;
 

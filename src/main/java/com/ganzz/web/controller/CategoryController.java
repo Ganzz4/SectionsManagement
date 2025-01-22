@@ -1,16 +1,11 @@
-package com.ganzz.web.controllers;
+package com.ganzz.web.controller;
 
 
 import com.ganzz.web.dto.CategoryDto;
-import com.ganzz.web.dto.SectionDto;
-import com.ganzz.web.models.Category;
-import com.ganzz.web.models.Section;
+import com.ganzz.web.model.Category;
 import com.ganzz.web.service.CategoryService;
-import com.ganzz.web.service.SectionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

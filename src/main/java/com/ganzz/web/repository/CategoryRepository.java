@@ -1,9 +1,7 @@
 package com.ganzz.web.repository;
 
-import com.ganzz.web.models.Category;
-import com.ganzz.web.models.Section;
+import com.ganzz.web.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Repository

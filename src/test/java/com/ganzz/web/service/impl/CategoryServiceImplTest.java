@@ -1,7 +1,7 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.CategoryDto;
-import com.ganzz.web.models.Category;
+import com.ganzz.web.model.Category;
 import com.ganzz.web.repository.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

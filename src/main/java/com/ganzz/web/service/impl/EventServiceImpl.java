@@ -2,8 +2,8 @@ package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.EventDto;
 import com.ganzz.web.mapper.EventMapper;
-import com.ganzz.web.models.Event;
-import com.ganzz.web.models.Section;
+import com.ganzz.web.model.Event;
+import com.ganzz.web.model.Section;
 import com.ganzz.web.repository.EventRepository;
 import com.ganzz.web.repository.SectionRepository;
 import com.ganzz.web.service.EventService;

@@ -1,9 +1,9 @@
-package com.ganzz.web.controllers;
+package com.ganzz.web.controller;
 
 import com.ganzz.web.dto.CategoryDto;
 import com.ganzz.web.dto.SectionDto;
-import com.ganzz.web.models.Section;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.Section;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.CategoryService;
 import com.ganzz.web.service.SectionService;

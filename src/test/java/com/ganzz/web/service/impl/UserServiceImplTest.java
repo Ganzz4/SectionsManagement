@@ -1,8 +1,8 @@
 package com.ganzz.web.service.impl;
 
 import com.ganzz.web.dto.RegistrationDto;
-import com.ganzz.web.models.Role;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.Role;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.repository.RoleRepository;
 import com.ganzz.web.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

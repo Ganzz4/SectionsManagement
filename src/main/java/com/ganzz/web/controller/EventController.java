@@ -1,8 +1,8 @@
-package com.ganzz.web.controllers;
+package com.ganzz.web.controller;
 
 import com.ganzz.web.dto.EventDto;
-import com.ganzz.web.models.Event;
-import com.ganzz.web.models.UserEntity;
+import com.ganzz.web.model.Event;
+import com.ganzz.web.model.UserEntity;
 import com.ganzz.web.security.SecurityUtil;
 import com.ganzz.web.service.EventService;
 import com.ganzz.web.service.UserService;
