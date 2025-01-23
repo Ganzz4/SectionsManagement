@@ -5,6 +5,10 @@ import com.ganzz.web.model.Event;
 
 public class EventMapper {
     public static Event mapToEvent(EventDto eventDto) {
+
+        if (eventDto == null) {
+            return null;
+        }
         return Event.builder()
                 .id(eventDto.getId())
                 .name(eventDto.getName())
@@ -19,6 +23,10 @@ public class EventMapper {
     }
 
     public static EventDto mapToEventDto(Event event) {
+        if (event == null) {
+            return null;
+        }
+
         return EventDto.builder()
                 .id(event.getId())
                 .name(event.getName())
