@@ -36,15 +36,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        configureCsrf(http);
         configureAuthorization(http);
         configureFormLogin(http);
         configureLogout(http);
         return http.build();
-    }
-
-    private void configureCsrf(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
     }
 
     private void configureAuthorization(HttpSecurity http) throws Exception {

@@ -14,6 +14,8 @@
     <section layout:fragment="body" class="py-5">
         <div class="container">
             <form role="form" method="post" th:action="@{/categories/new}" th:object="${category}">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                 <div class="form-row mb-3">
                     <div class="form-group col-md-6">
                         <label for="inputName">Name</label>

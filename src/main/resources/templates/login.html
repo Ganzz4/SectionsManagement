@@ -26,6 +26,7 @@
 
             <div class="login-form">
                 <form method="post" role="form" th:action="@{/login}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input

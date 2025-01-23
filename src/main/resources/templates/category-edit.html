@@ -15,6 +15,8 @@
     <div class="container">
       <div class="row justify-content-start">
         <form role="form" method="post" th:action="@{/categories/{categoryId}/edit(categoryId=${category.getId()})}" th:object="${category}" class="col-md-6">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
           <input type="hidden" th:field="*{id}">
           <div class="form-row mb-3">
             <div class="form-group">
