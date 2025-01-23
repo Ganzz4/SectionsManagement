@@ -7,6 +7,11 @@ import java.util.stream.Collectors;
 
 public class SectionMapper {
     public static Section mapToSection(SectionDto sectionDto) {
+
+        if (sectionDto == null) {
+            return null;
+        }
+
         return Section.builder()
                 .id(sectionDto.getId())
                 .title(sectionDto.getTitle())
@@ -23,6 +28,10 @@ public class SectionMapper {
     }
 
     public static SectionDto mapToSectionDto(Section section) {
+
+        if (section == null) {
+            return null;
+        }
 
         return SectionDto.builder()
                 .id(section.getId())
