@@ -118,7 +118,6 @@ public class EventController {
             model.addAttribute("event", eventDto);
             return "event-edit";
         }
-        eventService.createEvent(sectionId, eventDto);
         Long eventId = eventService.createEvent(sectionId, eventDto);
         return "redirect:/events/" + eventId;
     }

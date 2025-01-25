@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -30,6 +32,7 @@ class SecurityConfigTest {
     }
 
     @Test
+    @WithAnonymousUser
     void privateUrlsShouldRequireAuthentication() throws Exception {
         mockMvc.perform(get("/private-endpoint"))
                 .andExpect(status().is3xxRedirection())
@@ -39,8 +42,9 @@ class SecurityConfigTest {
     @Test
     void loginSuccessTest() throws Exception {
         mockMvc.perform(post("/login")
-                        .param("username", "user")
-                        .param("password", "password123"))
+                        .param("username", "test")
+                        .param("password", "test1234")
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/sections"));
     }
@@ -49,7 +53,8 @@ class SecurityConfigTest {
     void loginFailureTest() throws Exception {
         mockMvc.perform(post("/login")
                         .param("username", "user")
-                        .param("password", "wrongpassword"))
+                        .param("password", "wrongpassword")
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login?error=true"));
     }
@@ -57,7 +62,8 @@ class SecurityConfigTest {
     @Test
     @WithMockUser
     void logoutTest() throws Exception {
-        mockMvc.perform(post("/logout"))
+        mockMvc.perform(post("/logout")
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/login?logout"));
     }
