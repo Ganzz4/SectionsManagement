@@ -47,7 +47,8 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public SectionDto findSectionById(long sectionId) {
-        Section section = sectionRepository.findById(sectionId).get();
+        Section section = sectionRepository.findById(sectionId)
+                .orElseThrow(() -> new RuntimeException("Section not found with id: " + sectionId));
         return mapToSectionDto(section);
     }
 

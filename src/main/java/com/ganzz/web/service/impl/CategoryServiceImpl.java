@@ -42,7 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto findCategoryById(long categoryId) {
-        Category category = categoryRepository.findById(categoryId).get();
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
         return mapToCategoryDto(category);
     }
 

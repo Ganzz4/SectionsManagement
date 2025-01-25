@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.*;
 
@@ -36,7 +37,8 @@ public class PhotoServiceImpl implements PhotoService {
 
     protected String validateExternalUrl(String photoUrl) {
         try {
-            URL url = new URL(photoUrl);
+            URI uri = new URI(photoUrl);
+            URL url = uri.toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("HEAD");
             connection.setConnectTimeout(3000);
