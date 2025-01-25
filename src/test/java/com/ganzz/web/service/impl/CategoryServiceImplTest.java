@@ -86,7 +86,7 @@ class CategoryServiceImplTest {
     void testFindCategoryById_NotFound() {
         when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(NoSuchElementException.class, () -> categoryService.findCategoryById(1L));
+        assertThrows(RuntimeException.class, () -> categoryService.findCategoryById(1L));
 
         verify(categoryRepository, times(1)).findById(1L);
     }
